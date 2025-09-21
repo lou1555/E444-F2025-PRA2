@@ -12,3 +12,20 @@ def llll_format(dt: datetime) -> str:
 def index():
     now = datetime.now()
     return render_template("index.html", now_str=llll_format(now))
+
+@bp.route("/signup", methods=["GET", "POST"])
+def signup():
+    message = None
+    user = None
+    email = None
+
+    if request.method == "POST":
+        user = (request.form.get("name") or "").strip()
+        email = (request.form.get("email") or "").strip()
+
+        if "utoronto" in email.lower():
+            message = "Thanks! Your UofT email was accepted."
+        else:
+            message = "Please use your UofT email address."
+
+    return render_template("form.html", message=message, user=user, email=email)

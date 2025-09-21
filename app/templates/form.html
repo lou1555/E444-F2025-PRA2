@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}PRA2 - Chapter 4{% endblock %}
+{% block content %}
+  <h1 class="mb-3">Signup</h1>
+
+  <form method="post" class="row gy-2 gx-3 align-items-center">
+    <div class="col-12 col-md-4">
+      <label class="form-label">Name</label>
+      <input type="text" name="name" class="form-control" placeholder="Your name" required>
+    </div>
+    <div class="col-12 col-md-4">
+      <label class="form-label">UofT Email</label>
+      <input type="email" name="email" class="form-control" placeholder="you@utoronto.ca" required>
+    </div>
+    <div class="col-12 col-md-4 d-flex align-items-end">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+
+  {% if message %}
+    <hr>
+    <div class="alert {{ 'alert-success' if 'accepted' in message.lower() else 'alert-warning' }} mt-3">
+      {{ message }}
+    </div>
+
+    {% if 'accepted' in message.lower() %}
+      <p><strong>Name:</strong> {{ user }}</p>
+      <p><strong>Email:</strong> {{ email }}</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
